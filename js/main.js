@@ -20,12 +20,15 @@ scene.add( directionalLight );
 var controls = new THREE.OrbitControls( camera, renderer.domElement );
 controls.update();
 
+var clock = new THREE.Clock(); 
+var delta = 0;
 
 
-var typeModel = "gltf";
+var mixers = [];
+var typeModel = "fbx";
 
 if (typeModel == "gltf"){
-	startLoadGLTF();
+	//startLoadGLTF();
 }
 else if (typeModel == "fbx"){
 	startLoadFBX();
@@ -33,10 +36,19 @@ else if (typeModel == "fbx"){
 
 
 function animate() {
-	requestAnimationFrame( animate );
+	delta = clock.getDelta();
+
+	if ( mixers.length > 0 ) {
+        for ( var i = 0; i < mixers.length; i ++ ) {
+            mixers[i].update( delta );
+        }
+    } 
+	
 
 	controls.update();
 
 	renderer.render( scene, camera );
+	
+	requestAnimationFrame( animate );
 }
 animate();

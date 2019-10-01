@@ -2,12 +2,18 @@ var gltfModel = null;
 let gltfLoader = new THREE.GLTFLoader();
 
 function startLoadGLTF(){
-	gltfLoader.load('../models/room/Sketchfabroomtest.gltf', (gltf) => {
+	console.log("I was called");	
+	gltfLoader.load('../models/gltf/room/Sketchfabroomtest.gltf', (gltf) => {
 	  
+		
 	  gltfModel = gltf.scene;
+
+	  //Mixers from main.js
+	  gltfModel.mixer = new THREE.AnimationMixer( gltfModel );
+	  mixers.push( gltfModel.mixer );
+
 	  gltfModel.traverse( ( child ) => {
 	  })
-	  
 	  
 	  this.scene.add(gltfModel);
 	 

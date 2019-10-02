@@ -4,20 +4,51 @@
 		<meta charset="utf-8">
 		<title>My first three.js app</title>
 		<style>
-			body { margin: 0; }
+			body { margin: 0; color: #ffffff}
 			canvas { width: 100%; height: 100% }
+			
 		</style>
+
+		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-		<script src="js/three.js"></script>	
+
+		<div class="container">
+
+			<div class="loaders">
+				<a>Load Texture</a>
+				<input id="texture" type="file" />
+				<a>Load FBX Model</a>
+				<input id="fbx-loader" type="file" />
+				<br></br>
+				<a>Load GLTF Model</a>
+				<input id="fbx-loader" type="file" />
+				<br></br>
+				<a>Load Animation Timeline</a>
+				<input id="animation-timeline-loader" type="file" />
+			</div>
+			<br></br>
+			<div class="animations">
+				<a>Animation transition</a>
+				<input id="animation-transition" type="text" value="1.0" onchange="changeAnimationTransition();"/>
+				<br></br>
+				<a>Play animations</a>
+				<input id="play-previous" type="button" value="Previous" onclick="playPreviousAnimation()"/>
+				<input id="play-next" type="button" value="Next" onclick="playNextAnimation()"/>
+			</div>
+		</div>
+		<script src="js/three.js"></script>		
 		<script src="js/OrbitControls.js"></script>
 		<script src="js/FBXLoader.js"></script>
 		<script src="js/inflate.min.js"></script>
 		<script src="js/GLTFLoader.js"></script>
-		<script src="js/gltfManager.js"></script>
-		<script src="js/fbxManager.js"></script>
-		<script src="js/AnimationClip.js"></script>
 		<script src="js/AnimationUtils.js"></script>
+		<script src="js/utils.js"></script>
+		<script src="js/fbxManager.js"></script>
+		<script src="js/gltfManager.js"></script>
 		<script src="js/main.js"></script>
+		
+		
+
 	</body>
 </html>

@@ -7,7 +7,7 @@ This website was made to help modelers test 3D models.
 
 **Second**, edit the file Animations Timeline.json. Whether your model has 2 animations, so, you must delete the additional animations keyframes in the file.
 
-**After edit**, you need to choice between GLTF Loader or FBX Loader.
+**After edit**, you need to choose between GLTF Loader or FBX Loader.
 
 **_Attention: You should not load the model first, you need to load the texture and timeline first._**
 

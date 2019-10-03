@@ -3,9 +3,9 @@
 This website was made to help modelers test 3D models.
 [https://denisken.github.io/ThreeJS-Test/]
 
-**First**, do you need to Load the Texture.
+**First**, you need to load the Texture.
 
-**Second**, edit the file Animations Timeline.json. Whether your model has 2 animations, so, do you must delete the additional animations keyframes in the file.
+**Second**, edit the file Animations Timeline.json. Whether your model has 2 animations, so, you must delete the additional animations keyframes in the file.
 
 **After edit**, you need to choice between GLTF Loader or FBX Loader.
 

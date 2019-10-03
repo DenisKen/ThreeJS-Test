@@ -18,7 +18,7 @@ function startLoadFBX(){
 		mixers.push(fbxModel.mixer);
 		
 		//createAnimationsSplited();
-		createAnimationsTimeline();
+		createAnimationsTimeline(fbxModel);
 
 		fbxModel.traverse((child) => {
 
@@ -36,35 +36,8 @@ function startLoadFBX(){
 		fbxModel.position.y = -500;
 		fbxModel.scale.set(scale, scale, scale);
 
-		console.log("FBX Loaded >>>>>>>>>>>>>>>>>>>");
+		console.log("FBX Loaded >>>");
 	});	
 } 
-function createAnimationsSplited(){
-	for (var i = 0; i < fbxModel.animations.length; i++) {
-		var clipAction = fbxModel.mixer.clipAction( fbxModel.animations[ i ] );
-		animationsMixer[animationsTimeline[i].name] = clipAction;
-	}	
 
-	activeAllAnimations();
-	//Play first Animation
-	setWeight(animationsMixer[animationsTimeline[0].name], 1);
-}
-function createAnimationsTimeline(){
-	var clip = fbxModel.animations[0];
-	//Create Animations Action
-	for (var i = 0; i < animationsTimeline.length; i++) {
-		var tempClip = THREE.AnimationUtils.subclip( 	clip, 
-														animationsTimeline[i].name, 
-														animationsTimeline[i].startFrame, 
-														animationsTimeline[i].endFrame,
-														animationsTimeline[i].fps );
 
-		var clipAction = fbxModel.mixer.clipAction( tempClip );
-
-		animationsMixer[animationsTimeline[i].name] = clipAction;
-	}
-
-	activeAllAnimations();
-	//Play first Animation
-	setWeight(animationsMixer[animationsTimeline[0].name], 1);	
-}

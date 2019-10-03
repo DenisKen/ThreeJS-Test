@@ -36,6 +36,21 @@ function loadFBXModel(e){
 		startLoadFBX();
 	};
 }
+function loadGltfModel(e){
+
+	var file = e.target.files[0];
+	if (!file) {
+		return;
+	}
+	var reader = new FileReader();
+	reader.readAsDataURL(file);
+	reader.onload = function(e) {
+		var content = e.target.result;
+		//HABILITA O BOTAO
+		gltfLoaderPath = reader.result;
+		startLoadGLTF();
+	};
+}
 
 
 function loadTexture(e){

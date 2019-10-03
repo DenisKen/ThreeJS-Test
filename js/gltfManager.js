@@ -1,10 +1,11 @@
 var gltfModel = null;
 let gltfLoader = new THREE.GLTFLoader();
 
+var gltfLoaderPath;
 function startLoadGLTF(){
 	typeModel = "gltf";
 
-	gltfLoader.load('../models/gltf/room/Sketchfabroomtest.gltf', (gltf) => {
+	gltfLoader.load(gltfLoaderPath, (gltf) => {
 	  
 		
 	  gltfModel = gltf.scene;
@@ -13,24 +14,24 @@ function startLoadGLTF(){
 	  gltfModel.mixer = new THREE.AnimationMixer( gltfModel );
 	  mixers.push( gltfModel.mixer );
 
+	  createAnimationsTimeline(gltfModel);
+
 	  gltfModel.traverse( ( child ) => {
+
+		if (child.isMesh){				
+
+			console.log(child.material);
+			child.material.map = texture;
+		}
+		child.needsUpdate=true;
+
 	  })
 	  
 	  this.scene.add(gltfModel);
 	 
-	  gltfModel.position.y = 0;
-	  gltfModel.scale.x = 120;
-	  gltfModel.scale.y = 120;
-	  gltfModel.scale.z = 120;
+	  gltfModel.position.y = -500;
+	  gltfModel.scale.set(scale, scale, scale);
 
-	  console.log("GLTF Loaded >>>>>>>>>>>>>>>>>>>");
-	},
-	( xhr ) => {
-	  // called while loading is progressing
-	  console.log( `${( xhr.loaded / xhr.total * 100 )}% loaded` );
-	},
-	( error ) => {
-	  // called when loading has errors
-	  console.error( 'An error happened', error );
+	  console.log("GLTF Loaded >>>");
 	});	
 } 

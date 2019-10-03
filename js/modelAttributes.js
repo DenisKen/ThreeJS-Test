@@ -45,4 +45,35 @@ function disableAllAnimationsWeight(){
 	for(key in animationsMixer){
 		setWeight(animationsMixer[key], 0);
 	}
-};	
+}
+
+function createAnimationsTimeline(model){
+	var clip = model.animations[0];
+	//Create Animations Action
+	for (var i = 0; i < animationsTimeline.length; i++) {
+		var tempClip = THREE.AnimationUtils.subclip( 	clip, 
+														animationsTimeline[i].name, 
+														animationsTimeline[i].startFrame, 
+														animationsTimeline[i].endFrame,
+														animationsTimeline[i].fps );
+
+		var clipAction = model.mixer.clipAction( tempClip );
+
+		animationsMixer[animationsTimeline[i].name] = clipAction;
+	}
+
+	activeAllAnimations();
+	//Play first Animation
+	setWeight(animationsMixer[animationsTimeline[0].name], 1);	
+}
+
+function createAnimationsSplited(model){
+	for (var i = 0; i < model.animations.length; i++) {
+		var clipAction = model.mixer.clipAction( model.animations[ i ] );
+		animationsMixer[animationsTimeline[i].name] = clipAction;
+	}	
+
+	activeAllAnimations();
+	//Play first Animation
+	setWeight(animationsMixer[animationsTimeline[0].name], 1);
+}

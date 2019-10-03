@@ -1,6 +1,7 @@
 # ThreeJS-Test
 
 This website was made to help modelers test 3D models.
+[https://denisken.github.io/ThreeJS-Test/]
 
 **First**, do you need to Load the Texture.
 

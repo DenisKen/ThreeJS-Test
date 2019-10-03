@@ -17,3 +17,5 @@ Mouse Left Button: Rotate camera.
 Mouse Right Button: Move camera X or Z position.
 
 Mouse Scroll: Zoom.
+
+F12 to see the log (errors, materials attributes, animations log, etc)

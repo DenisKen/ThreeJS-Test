@@ -1,5 +1,3 @@
-document.getElementById('animation-timeline-loader').addEventListener('change', loadTimeline, false);
-document.getElementById('fbx-loader').addEventListener('change', loadFBXModel, false);
 //INIT
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 10000 );
@@ -27,22 +25,23 @@ var delta = 0;
 
 
 var mixers = [];
-var typeModel = "fbx";
+var typeModel = "";
 
 
 //>>>>>>>>>>>>>>>>>>>>> HUD >>>>>>>>>>>>
-var animationTransition = 1;
+var animationTransition = 1.0;
 var indexAnimation = 0;
 var animationsTimeline = [];
 
 function changeAnimationTransition(){
-	animationTransition = document.getElementById('animation-transition').value;
+	animationTransition = parseFloat(document.getElementById('animation-transition').value);
+	console.log("Animation Transition changed to:",animationTransition);
 }
 function playNextAnimation(){
 	
 	if (indexAnimation < animationsTimeline.length-1){
 		indexAnimation += 1;
-		playAnimation(animationsTimeline[indexAnimation].name,animationTransition);
+		playAnimation(animationsTimeline[indexAnimation].name, animationTransition);
 		return;
 	}
 	console.log("Last animation");
@@ -50,49 +49,24 @@ function playNextAnimation(){
 function playPreviousAnimation(){
 	if (indexAnimation > 0){
 		indexAnimation -= 1;
-		playAnimation(animationsTimeline[indexAnimation].name,animationTransition);
+		playAnimation(animationsTimeline[indexAnimation].name, animationTransition);
 		return;
 	}
 	console.log("First animation");
 }
 function changeModelScale(){
+	
+	scale = document.getElementById('model-scale').value;
+
+	if (typeModel == "fbx")
+		fbxModel.scale.set(scale,scale,scale);
+	else if(typeModel == "gltf")
+		fbxModel.scale.set(scale,scale,scale);
 
 }
 
-function loadTimeline(e){
-	var file = e.target.files[0];
-	if (!file) {
-		return;
-	}
-	var reader = new FileReader();
-	reader.readAsText(file);
-	reader.onload = function(e) {
-		var content = e.target.result;
-		//HABILITA O BOTAO
-		console.log("Reader loaded");
-		var json = JSON.parse(reader.result);
-		for (let i = 0; i < json.animationsTimeline.length; i++) {
-			animationsTimeline.push(json.animationsTimeline[i]);
-		}
-		//startLoadFBX();
-	};
-}
-function loadFBXModel(e){
 
-	var file = e.target.files[0];
-	if (!file) {
-		return;
-	}
-	var reader = new FileReader();
-	reader.readAsDataURL(file);
-	reader.onload = function(e) {
-		var content = e.target.result;
-		//HABILITA O BOTAO
-		FBXLoaderPath = reader.result;
-		window.reader = reader;
-		startLoadFBX();
-	};
-}
+
 
 if (typeModel == "gltf"){
 	//startLoadGLTF();

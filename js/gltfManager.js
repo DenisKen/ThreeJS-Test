@@ -2,7 +2,8 @@ var gltfModel = null;
 let gltfLoader = new THREE.GLTFLoader();
 
 function startLoadGLTF(){
-	console.log("I was called");	
+	typeModel = "gltf";
+
 	gltfLoader.load('../models/gltf/room/Sketchfabroomtest.gltf', (gltf) => {
 	  
 		

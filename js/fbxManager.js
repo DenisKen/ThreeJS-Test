@@ -1,15 +1,11 @@
 var fbxModel = null;
 let fbxLoader = new THREE.FBXLoader();
 
-
-
-var animationsMixer = {};
-var currentAnimationName;
-var idle;
-var walk;
 var FBXLoaderPath;
+
 function startLoadFBX(){
 
+	typeModel = "fbx";
 	currentAnimationName = animationsTimeline[0].name;
 
 	fbxLoader.load(FBXLoaderPath, (object) => {
@@ -25,13 +21,20 @@ function startLoadFBX(){
 		createAnimationsTimeline();
 
 		fbxModel.traverse((child) => {
+
+			if (child.isMesh){				
+
+				console.log(child.material);
+				child.material.map = texture;
+			}
+			child.needsUpdate=true;
 		})
 		
 		
 		this.scene.add(fbxModel);
 		
 		fbxModel.position.y = -500;
-		fbxModel.scale.set(50,50,50);
+		fbxModel.scale.set(scale, scale, scale);
 
 		console.log("FBX Loaded >>>>>>>>>>>>>>>>>>>");
 	});	
@@ -50,7 +53,6 @@ function createAnimationsTimeline(){
 	var clip = fbxModel.animations[0];
 	//Create Animations Action
 	for (var i = 0; i < animationsTimeline.length; i++) {
-		console.log("Im here");
 		var tempClip = THREE.AnimationUtils.subclip( 	clip, 
 														animationsTimeline[i].name, 
 														animationsTimeline[i].startFrame, 
@@ -64,46 +66,5 @@ function createAnimationsTimeline(){
 
 	activeAllAnimations();
 	//Play first Animation
-	setWeight(animationsMixer[animationsTimeline[0].name], 1);
-	//playAnimation("idle", 1);
-	
+	setWeight(animationsMixer[animationsTimeline[0].name], 1);	
 }
-
-function playAnimation(name,duration){
-	if (currentAnimationName == name)
-		return;
-	
-	var animationToPlay = animationsMixer[name];
-	var currentAnimation = animationsMixer[currentAnimationName];
-		
-	setWeight(animationToPlay, 1);
-	animationToPlay.time = 0;
-		
-	currentAnimation.crossFadeTo(animationToPlay,duration, 0);
-
-	currentAnimationName = name;
-
-	console.log("Play animation", name);
-}
-function activeAllAnimations(){
-
-	var key;
-	for(key in animationsMixer){
-
-		setWeight(animationsMixer[key], 0);
-		animationsMixer[key].play();
-	}
-}
-
-function setWeight(action, weight){
-	action.enabled = true;
-	action.setEffectiveTimeScale( 1 );
-	action.setEffectiveWeight( weight );
-}
-
-function disableAllAnimationsWeight(){	
-	var key;
-	for(key in animationsMixer){
-		setWeight(animationsMixer[key], 0);
-	}
-};	

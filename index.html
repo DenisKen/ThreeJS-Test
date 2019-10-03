@@ -17,36 +17,40 @@
 
 			<div class="loaders">
 				<a>Load Texture</a>
-				<input id="texture" type="file" />
+				<input id="texture-loader" type="file" accept="image/png, image/jpeg, image/jpg"/>
+				<p></p>
 				<a>Load FBX Model</a>
-				<input id="fbx-loader" type="file" />
-				<br></br>
+				<input id="fbx-loader" type="file" accept=".fbx"/>
+				<p></p>
 				<a>Load GLTF Model</a>
-				<input id="fbx-loader" type="file" />
-				<br></br>
+				<input id="fbx-loader" type="file" accept=".gltf, glb"/>
+				<p></p>
 				<a>Load Animation Timeline</a>
-				<input id="animation-timeline-loader" type="file" />
+				<input id="animation-timeline-loader" type="file" accept=".json"/>
 			</div>
 			<br></br>
 			<div class="animations">
 				<a>Animation transition</a>
-				<input id="animation-transition" type="text" value="1.0" onchange="changeAnimationTransition();"/>
+				<input class="inputText"  id="animation-transition" type="text" value="1.0" onchange="changeAnimationTransition();"/>
+				<a>Set Model Scale</a>
+				<input class="inputText" id="model-scale" type="text" value="50" onchange="changeModelScale();"/>
 				<br></br>
 				<a>Play animations</a>
 				<input id="play-previous" type="button" value="Previous" onclick="playPreviousAnimation()"/>
 				<input id="play-next" type="button" value="Next" onclick="playNextAnimation()"/>
 			</div>
 		</div>
-		<script src="js/three.js"></script>		
-		<script src="js/OrbitControls.js"></script>
-		<script src="js/FBXLoader.js"></script>
-		<script src="js/inflate.min.js"></script>
-		<script src="js/GLTFLoader.js"></script>
-		<script src="js/AnimationUtils.js"></script>
-		<script src="js/utils.js"></script>
+		<script src="js/libs/three.js"></script>		
+		<script src="js/modelAttributes.js"></script>
+		<script src="js/libs/OrbitControls.js"></script>
+		<script src="js/libs/FBXLoader.js"></script>
+		<script src="js/libs/inflate.min.js"></script>
+		<script src="js/libs/GLTFLoader.js"></script>
+		<script src="js/libs/AnimationUtils.js"></script>
 		<script src="js/fbxManager.js"></script>
 		<script src="js/gltfManager.js"></script>
 		<script src="js/main.js"></script>
+		<script src="js/loaders.js"></script>
 		
 		
 
